@@ -1,0 +1,436 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `sgp` DEFAULT CHARACTER SET utf8 ;
+USE `sgp` ;
+
+-- -----------------------------------------------------
+-- Table `sgp`.`type_attendances`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`type_attendances` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `sgl` VARCHAR(2) NULL DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`companies`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`companies` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`jobs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`jobs` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(55) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`situations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`situations` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`employees`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`employees` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `company_id` INT(11) NOT NULL,
+  `job_id` INT(11) NOT NULL,
+  `situation_id` INT(11) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `registration` VARCHAR(100) NULL DEFAULT NULL,
+  `cpf` VARCHAR(11) NULL DEFAULT NULL,
+  `hire_date` DATETIME NULL DEFAULT NULL,
+  `workload` INT(11) NULL DEFAULT NULL,
+  `birth_date` DATE NULL DEFAULT NULL,
+  `phone1` VARCHAR(11) NULL DEFAULT NULL,
+  `phone2` VARCHAR(11) NULL DEFAULT NULL,
+  `phone3` VARCHAR(11) NULL DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `resignation_date` DATE NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_employees_companies1_idx` (`company_id` ASC),
+  INDEX `fk_employees_jobs1_idx` (`job_id` ASC),
+  INDEX `fk_employees_situations1_idx` (`situation_id` ASC),
+  INDEX `fk_employees_users1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_employees_companies1`
+    FOREIGN KEY (`company_id`)
+    REFERENCES `sgp`.`companies` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employees_jobs1`
+    FOREIGN KEY (`job_id`)
+    REFERENCES `sgp`.`jobs` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employees_situations1`
+    FOREIGN KEY (`situation_id`)
+    REFERENCES `sgp`.`situations` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employees_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `sgp`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 718
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` INT(11) NULL DEFAULT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `password` VARCHAR(100) NULL DEFAULT NULL,
+  `level` VARCHAR(20) NULL DEFAULT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_users_employees1_idx` (`employee_id` ASC),
+  CONSTRAINT `fk_users_employees1`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `sgp`.`employees` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`operations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`operations` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`teams`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`teams` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `operation_id` INT(11) NOT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_teams_operations1_idx` (`operation_id` ASC),
+  CONSTRAINT `fk_teams_operations1`
+    FOREIGN KEY (`operation_id`)
+    REFERENCES `sgp`.`operations` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 20
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`workers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`workers` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `team_id` INT(11) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  `employee_id` INT(11) NOT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_workers_teams1_idx` (`team_id` ASC),
+  INDEX `fk_workers_employees1_idx` (`employee_id` ASC),
+  INDEX `fk_workers_users1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_workers_employees1`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `sgp`.`employees` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_workers_teams1`
+    FOREIGN KEY (`team_id`)
+    REFERENCES `sgp`.`teams` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_workers_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `sgp`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 70
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`attendances`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`attendances` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `worker_id` INT(11) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  `type_attendance_id` INT(11) NOT NULL,
+  `day` VARCHAR(45) NULL DEFAULT NULL,
+  `month` VARCHAR(45) NULL DEFAULT NULL,
+  `year` VARCHAR(45) NULL DEFAULT NULL,
+  `alert` TINYINT(1) NULL DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_attendances_workers1_idx` (`worker_id` ASC),
+  INDEX `fk_attendances_users1_idx` (`user_id` ASC),
+  INDEX `fk_attendances_type_attendances1_idx` (`type_attendance_id` ASC),
+  CONSTRAINT `fk_attendances_type_attendances1`
+    FOREIGN KEY (`type_attendance_id`)
+    REFERENCES `sgp`.`type_attendances` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_attendances_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `sgp`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_attendances_workers1`
+    FOREIGN KEY (`worker_id`)
+    REFERENCES `sgp`.`workers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`ci_sessions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`ci_sessions` (
+  `session_id` VARCHAR(40) NOT NULL DEFAULT '0',
+  `ip_address` VARCHAR(45) NOT NULL DEFAULT '0',
+  `user_agent` VARCHAR(120) NOT NULL,
+  `last_activity` INT(40) UNSIGNED NOT NULL DEFAULT '0',
+  `user_data` TEXT NOT NULL,
+  PRIMARY KEY (`session_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`cids`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`cids` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NULL DEFAULT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 14237
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`day_offs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`day_offs` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`doctors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`doctors` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NULL DEFAULT NULL,
+  `crm` VARCHAR(50) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 270
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`health_stations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`health_stations` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(200) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`type_certificates`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`type_certificates` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`medical_certificates`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`medical_certificates` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `worker_id` INT(11) NOT NULL,
+  `delivery_date` DATETIME NULL DEFAULT NULL,
+  `start_certificate` DATETIME NULL DEFAULT NULL,
+  `finish_certificate` DATETIME NULL DEFAULT NULL,
+  `number_day` INT(11) NULL DEFAULT NULL,
+  `type_certificate_id` INT(11) NOT NULL,
+  `day_off_id` INT(11) NOT NULL,
+  `cid_id` INT(11) NOT NULL,
+  `accredit` TINYINT(1) NULL DEFAULT NULL,
+  `doctor_id` INT(11) NOT NULL,
+  `health_station_id` INT(11) NOT NULL,
+  `description` TEXT NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_medical_certificates_workers1_idx` (`worker_id` ASC),
+  INDEX `fk_medical_certificates_type_certificates1_idx` (`type_certificate_id` ASC),
+  INDEX `fk_medical_certificates_day_offs1_idx` (`day_off_id` ASC),
+  INDEX `fk_medical_certificates_cids1_idx` (`cid_id` ASC),
+  INDEX `fk_medical_certificates_doctors1_idx` (`doctor_id` ASC),
+  INDEX `fk_medical_certificates_health_stations1_idx` (`health_station_id` ASC),
+  INDEX `fk_medical_certificates_users1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_medical_certificates_cids1`
+    FOREIGN KEY (`cid_id`)
+    REFERENCES `sgp`.`cids` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_day_offs1`
+    FOREIGN KEY (`day_off_id`)
+    REFERENCES `sgp`.`day_offs` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_doctors1`
+    FOREIGN KEY (`doctor_id`)
+    REFERENCES `sgp`.`doctors` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_health_stations1`
+    FOREIGN KEY (`health_station_id`)
+    REFERENCES `sgp`.`health_stations` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_type_certificates1`
+    FOREIGN KEY (`type_certificate_id`)
+    REFERENCES `sgp`.`type_certificates` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `sgp`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medical_certificates_workers1`
+    FOREIGN KEY (`worker_id`)
+    REFERENCES `sgp`.`workers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 17
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `sgp`.`teams_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgp`.`teams_users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `team_id` INT(11) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_teams_users_teams1_idx` (`team_id` ASC),
+  INDEX `fk_teams_users_users1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_teams_users_teams1`
+    FOREIGN KEY (`team_id`)
+    REFERENCES `sgp`.`teams` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_teams_users_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `sgp`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 70
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
