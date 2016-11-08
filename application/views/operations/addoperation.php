@@ -12,14 +12,24 @@
           <div class="table-responsive">
             <form class="form-group" action="<?php echo base_url() ?>operations/saveoperation" method="post">
               <div>
-                <div class="col-md-8">
+                <div class="col-md-5">
                   <label for="name">Nome:</label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Informe o Departamento" required>
                 </div>
               </div>
 
+              <div class="col-md-4">
+                  <label for="company_id">Nome da Empresa:</label>
+                  <select id="company_id" name="company_id" class="form-control" required>
+                    <option value=" "> Selecione </option>
+                    <?php foreach ($companies as $company) { ?>
+                      <option value="<?php echo $company->id; ?>"> <?php echo $company->name; ?> </option>
+                    <?php } ?>
+                  </select>
+                </div>
+
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="active">Status:</label>
                   <select id="active" name="active" class="form-control" required>
                     <option value=""> Selecione </option>

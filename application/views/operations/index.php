@@ -15,6 +15,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Nome</th>
+						<th>Empresa</th>
 						<th>Ativo?</th>
 						<th>Criado</th>
 						<th>Modificado</th>
@@ -25,12 +26,13 @@
 				<tbody>
 					<?php foreach ($operations as $operation) { ?>
 						<tr>
-							<td><?php echo $operation->id; ?></td>
-							<td><?php echo $operation->name; ?></td>
+							<td><?php echo $operation->oid; ?></td>
+							<td><?php echo $operation->oname; ?></td>
+							<td><?php echo $operation->cname; ?></td>
 							<td>
 							<?php
 							$operationactive = 1;
-								if ($operationactive == $operation->active) {
+								if ($operationactive == $operation->oactive) {
 									echo "<span class='label label-success'>Sim</span>";
 								} else {
 									echo "<span class='label label-danger'>Não</span>";
@@ -38,19 +40,19 @@
 							?>
 							</td>
 							<td>
-							<?php   $timestamp = strtotime(($operation->created));
+							<?php   $timestamp = strtotime(($operation->ocreated));
 								echo date('d/m/y', $timestamp);
 							?>
 							</td>
 
 							<td>
-							<?php   $timestamp = strtotime(($operation->modified));
+							<?php   $timestamp = strtotime(($operation->omodified));
 								echo date('d/m/y', $timestamp);
 							?>
 							</td>
 
-							<td><a href="<?php echo base_url('operations/edit/'.$operation->id); ?>" class="btn btn-primary btn-group"><i class="glyphicon glyphicon-pencil"></i></a>
-							<a href="<?php echo base_url('operations/delete/'.$operation->id); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td>
+							<td><a href="<?php echo base_url('operations/edit/'.$operation->oid); ?>" class="btn btn-primary btn-group"><i class="glyphicon glyphicon-pencil"></i></a>
+							<!-- <a href="<?php echo base_url('operations/delete/'.$operation->oid); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td> -->
 						</tr>
 					<?php } ?>
 				</tbody>

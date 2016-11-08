@@ -37,7 +37,7 @@
 							</td>
 
 							<td><a href="<?php echo base_url('jobs/edit/'.$job->id); ?>" class="btn btn-primary btn-group"><i class="glyphicon glyphicon-pencil"></i></a>
-							<a href="<?php echo base_url('jobs/delete/'.$job->id); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td>
+							<!-- <a href="<?php echo base_url('jobs/delete/'.$job->id); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td> -->
 						</tr>
 					<?php } ?>
 				</tbody>

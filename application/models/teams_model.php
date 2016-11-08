@@ -20,7 +20,7 @@
 			 	O.name as oname');
 			 $this->db->from('teams as T');
 			 $this->db->join('operations as O', 'O.id = T.operation_id','inner');
-			 $this->db->order_by("tid", "desc");
+			 $this->db->order_by("tid", "ASC");
 			 $query = $this->db->get();
 			 return $query->result();
 		}

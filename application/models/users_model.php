@@ -28,11 +28,14 @@
 			 	T.active as tactive,
 			 	T.created as tcreated,
 			 	T.modified as tmodified,
+			 	C.id as cid,
+			 	C.name as cname,
 			 	O.id as oid,
 			 	O.name as oname');
 			 $this->db->from('teams as T');
 			 $this->db->join('operations as O', 'O.id = T.operation_id','inner');
-			 $this->db->order_by("tid", "desc");
+			 $this->db->join('companies as C', 'C.id = O.company_id','left');
+			 $this->db->order_by("cid", "cname", "desc");
 			 $query = $this->db->get();
 			 return $query->result();
 		}

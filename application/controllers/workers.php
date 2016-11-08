@@ -84,6 +84,9 @@ class Workers extends CI_Controller {
 		} else if ($indice==6) {
 			$data['msg'] = "Erro ao atualizar.!";
 			$this->load->view('include/msg_error',$data);
+		} else if ($indice==7) {
+			$data['msg'] = "Este funcionário já está cadastrado no sistema em outra equipe!";
+			$this->load->view('include/msg_error',$data);
 		}
 
 
@@ -200,11 +203,23 @@ class Workers extends CI_Controller {
 
 		$this->load->model('workers_model', 'model', TRUE);
 
-			if ($this->model->saveworkers($data,$employee)) {
+		$this->db->where('employee_id', $data['employee_id']);
+		$num_rows = $this->db->count_all_results('workers');
+		// var_dump($num_rows);
+		if($num_rows > 0){
+			redirect('workers/listworkers/7');
+		} else {
+			$this->model->saveworkers($data,$employee);
 						redirect('workers/listworkers/1');
-			} else {
-						redirect('workers/listworkers/2');
-			}
+		}
+
+			// if ($this->model->saveworkers($data,$employee)) {
+			// 			redirect('workers/listworkers/1');
+			// } else {
+			// 			redirect('workers/listworkers/2');
+			// }
+
+
 	}
 
 		public function delete($id=null)

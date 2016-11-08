@@ -10,7 +10,7 @@
             <form class="form-group" action="<?php echo base_url() ?>workers/saveworker" method="post">
 
               <div class="row"  >
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <label>Funcionario</label>
                     <select id="employee_id" name="employee_id" class="form-control selectpicker" data-live-search="true" required>
                       <option value=""> Selecione </option>
@@ -28,7 +28,7 @@
                       <?php } ?>
                     </select>
                   </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="active">Status:</label>
                   <select id="active" name="active" class="form-control" required>
                     <option value=""> Selecione </option>

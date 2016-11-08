@@ -50,10 +50,17 @@ class Operations extends CI_Controller {
 	{
 		$this->verifcar_sessao();
 
+		$this->load->model("operations_model");
+		$companies = $this->operations_model->listCompaniesCombo();
+
+		$dados = array(
+						"companies"=>$companies
+		);
+
 		$this->load->view('include/header');
 		$this->load->view('include/menu_top');
 		$this->load->view('include/menu');
-		$this->load->view('operations/addoperation.php');
+		$this->load->view('operations/addoperation.php',$dados);
 		$this->load->view('include/footer');
 	}
 
@@ -62,9 +69,15 @@ class Operations extends CI_Controller {
 		$this->verifcar_sessao();
 
 		$data['name'] = $this->input->post('name');
+		$data['company_id'] = $this->input->post('company_id');
 		$data['active'] = $this->input->post('active');
 		$data['created'] = date('Y-m-d H:i:s');
 		$data['modified'] = date('Y-m-d H:i:s');
+
+		// echo "<pre>";
+		// var_dump($data);
+		// echo "</pre>";
+		// die();
 
 		$this->load->model('operations_model', 'model', TRUE);
 
@@ -91,13 +104,21 @@ class Operations extends CI_Controller {
 	{
 		$this->verifcar_sessao();
 
-		$this->db->where('id',$id);
-		$data['operations'] = $this->db->get('operations')->result();
+		$this->load->model("operations_model");
+		$companies = $this->operations_model->listCompaniesCombo();
+		$this->data['result'] = $this->operations_model->listEditOperations($this->uri->segment(3));
+
+		$dados = array("companies"=>$companies,	"result"=>$this->data['result']);
+
+		// echo "<pre>";
+		// var_dump($dados);
+		// echo "</pre>";
+		// die();
 
 		$this->load->view('include/header');
 		$this->load->view('include/menu_top');
 		$this->load->view('include/menu');
-		$this->load->view('operations/edit.php',$data);
+		$this->load->view('operations/edit.php',$dados);
 		$this->load->view('include/footer');
 	}
 
@@ -107,6 +128,7 @@ class Operations extends CI_Controller {
 		
 		$id = $this->input->post('id');
 		$data['name'] = $this->input->post('name');
+		$data['company_id'] = $this->input->post('company_id');
 		$data['active'] = $this->input->post('active');
 		$data['modified'] = date('Y-m-d H:i:s');
 

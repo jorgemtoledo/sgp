@@ -36,7 +36,7 @@
 							</td>
 
 							<td><a href="<?php echo base_url('companies/edit/'.$company->id); ?>" class="btn btn-primary btn-group"><i class="glyphicon glyphicon-pencil"></i></a>
-							<a href="<?php echo base_url('companies/delete/'.$company->id); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td>
+							<!-- <a href="<?php echo base_url('companies/delete/'.$company->id); ?>" class="btn btn-danger btn-group" onclick="return confirm('Deseja realmente excluir!');"><i class="glyphicon glyphicon-trash"></i></a></td> -->
 						</tr>
 					<?php } ?>
 				</tbody>

@@ -1,7 +1,8 @@
 <div id="page-wrapper">
   <div class="row">
 
-          <h1 class="page-header">Cadastrar novo usuário <?php echo " - Id do usuario: " . $users[0]->id; ?></h1>
+          <!-- <h1 class="page-header">Cadastrar Permissões usuário <?php echo " - Id do usuario: " . $users[0]->id; ?></h1> -->
+          <h1 class="page-header">Cadastrar permissões usuário: <em> <?php echo $users[0]->name; ?> </em></h1>
 
           <div class="box-tools pull-right">
                 <a class="btn btn-success" href="<?php echo base_url() ?>users" ><i class="glyphicon glyphicon-list-alt"></i>   Listar usuários </a>
@@ -27,12 +28,12 @@
               </div> -->
 
               <div class="row"  >
-                <div class="col-md-5">
+                <div class="col-md-10">
                   <label>Equipes</label>
                   <?php foreach ($teams as $team) { ?>
                   <div class="checkbox">
                       <label>
-                          <input 
+                          <h3> <input 
                                 type="checkbox" 
                                 name="team_id[]" 
                                 id="team_id[]" 
@@ -45,15 +46,15 @@
                                           echo $team->tid==$obj->team_id?'checked="checked"':''; 
                                       }
                                 ?>>
-                                <?php echo $team->tname; ?>
+                                <?php echo $team->tname; ?> <small> - <em><?php echo $team->oname; ?></em>  - <em><?php echo $team->cname; ?></em></small></h3>
                       </label>
                   </div>
                   <?php } ?>
               </div>
-              </div>
+              </div><br /><br />
               <div style="text-align: right">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
+                <!-- <button type="reset" class="btn btn-danger">Cancelar</button> -->
               </div>
             </form>
           </div>
