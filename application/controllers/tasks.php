@@ -17,9 +17,18 @@ class Tasks extends CI_Controller {
         $this->load->view('include/footer');
     }
 
+    // Mostra equipe pelo tipo de permissao do usuario as equipes
     public function taskteammedcertificates($id=null)
 	{
 		$this->verifcar_sessao();
+
+		// Session id
+		$data['user_id'] = $this->session->userdata('id');
+		$session_id = $data['user_id'];
+
+		if($session_id != $id){
+			redirect('tasks');
+		} else {
 
 		$this->load->model("tasks_model");
 		$teams = $this->tasks_model->listTeams($this->uri->segment(3));
@@ -31,6 +40,43 @@ class Tasks extends CI_Controller {
 		$this->load->view('include/menu');
 		$this->load->view('tasks/taskteammedcertificates.php',$dados);
 		$this->load->view('include/footer');
+
+		};
+	}
+
+
+	// Birthdays  teams
+	public function taskbirthdays($id=null)
+	{
+		$this->verifcar_sessao();
+
+		// Session id
+		$data['user_id'] = $this->session->userdata('id');
+		$session_id = $data['user_id'];
+
+		if($session_id != $id){
+			redirect('tasks');
+		} else {
+
+		$this->load->model("tasks_model");
+		$teams = $this->tasks_model->listBirthdays($this->uri->segment(3));
+
+		$dados = array("teams"=>$teams);
+
+		// echo "<pre>";
+		// print_r($dados);
+		// echo "</pre>";
+		// die();
+
+		$this->load->view('include/header');
+		$this->load->view('include/menu_top');
+		$this->load->view('include/menu');
+		$this->load->view('tasks/taskbirthdays.php',$dados);
+		$this->load->view('include/footer');
+
+		};
+
+
 	}
 
     public function taskmedcertificates($id=null)

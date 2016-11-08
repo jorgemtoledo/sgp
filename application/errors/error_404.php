@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
+<meta charset="utf-8">
 <title>404 Page Not Found</title>
 <style type="text/css">
 
@@ -54,9 +55,15 @@ p {
 </style>
 </head>
 <body>
-	<div id="container">
+<!-- 	<div id="container">
 		<h1><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
+	</div> -->
+	<!-- Pagina 404 -->
+	<div id="container">
+		<h1>A página não foi encontrada!</h1>
+		<!-- <?php echo $message; ?> -->
+		<p>Favor entrar em contato com o Administrador do Sistema SGP ou no RH da Contato!</p>
 	</div>
 </body>
 </html>

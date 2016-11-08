@@ -23,6 +23,31 @@
 
 		}
 
+		// Birthdays
+		public function listBirthdays($id){
+
+			$this->db->select(
+			 	'TS.id as wid,
+			 	TS.team_id as wteam,
+			 	TS.user_id as wuser,
+			 	U.id as uid,
+			 	U.name as uname,
+			 	T.id as tid, W.employee_id as we,
+			 	E.id as eid, E.name as ename,
+			 	(MONTH( CURDATE( ) ) = MONTH( E.birth_date )) AS niver,	(DAY(E.birth_date)) AS dia,
+			 	T.name as tname');
+			 $this->db->from('teams_users as TS');
+			 $this->db->join('users as U', 'U.id = TS.user_id','inner');
+			 $this->db->join('teams as T', 'T.id = TS.team_id','inner');
+			 $this->db->join('workers as W', 'W.team_id = T.id','inner');
+			 $this->db->join('employees as E', 'E.id = W.employee_id','inner');
+			 $this->db->where('TS.user_id',$id);
+			 $this->db->having('niver', 1);
+			 $this->db->order_by('dia', 'ASC');
+		 	 return $this->db->get()->result();
+
+		}
+
 		public function listOneTeams($id){
 
 				$this->db->select(

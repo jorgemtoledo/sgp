@@ -190,16 +190,16 @@
                     </div>
                 </div>
 
-
+                <!-- Teste relatorios datas -->
                 <?php
-                    echo $testeDate = date('d-m-Y') . "<br />";
+                     $testeDate = date('d-m-Y') . "<br />";
 
                     date_default_timezone_set('America/Campo_Grande');
                     // $date = date('Y-m-d H:i');
                     $date = date('d-m-Y');
                     // echo $date . "<br />";
 
-                    echo date('d-m-Y', strtotime($date. ' - 10 days'));
+                    // echo date('d-m-Y', strtotime($date. ' - 10 days'));
                 ?>
 
         </div>
