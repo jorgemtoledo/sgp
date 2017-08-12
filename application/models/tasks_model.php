@@ -19,6 +19,7 @@
 			 $this->db->join('users as U', 'U.id = W.user_id','inner');
 			 $this->db->join('teams as T', 'T.id = W.team_id','inner');
 			 $this->db->where('W.user_id',$id);
+			 $this->db->order_by('T.name', 'ASC');
 		 	 return $this->db->get()->result();
 
 		}
@@ -91,6 +92,7 @@
 			 $this->db->join('teams as T', 'T.id = W.team_id','inner');
 			 $this->db->where('W.active',1);
 		 	 $this->db->where('T.id',$id);
+		 	 $this->db->order_by('E.name', 'ASC');
 		 	 return $this->db->get()->result();
 
 		}

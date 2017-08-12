@@ -121,14 +121,42 @@ class Users extends CI_Controller {
 		$this->load->view('include/footer');
 	}
 
+	public function myEdit($id=null)
+	{
+		$this->verifcar_sessao();
+
+		// Session id
+		$data['user_id'] = $this->session->userdata('id');
+		$session_id = $data['user_id'];
+
+		if($session_id != $id){
+			redirect('dashboard');
+		} else {
+
+
+		if (!isset($id) || $id == '0') {
+			redirect('users');
+		} else {
+			$this->db->where('id',$id);
+			$data['users'] = $this->db->get('users')->result();
+		}
+		$this->load->view('include/header');
+		$this->load->view('include/menu_top');
+		$this->load->view('include/menu');
+		$this->load->view('users/myEdituser.php',$data);
+		$this->load->view('include/footer');
+
+		};
+	}
+
 	public function save_edit()
 	{
 		$this->verifcar_sessao();
-		
+
 		$id = $this->input->post('id');
 		$data['name'] = $this->input->post('name');
 		$data['email'] = $this->input->post('email');
-		//$data['password'] = md5($this->input->post('password'));
+		$data['password'] = md5($this->input->post('password'));
 		// $data['employee_id'] = $this->input->post('employee_id');
 		$data['level'] = $this->input->post('level');
 		$data['active'] = $this->input->post('active');
@@ -140,6 +168,24 @@ class Users extends CI_Controller {
 						redirect('users/5');
 			} else {
 						redirect('users/6');
+			}
+	}
+
+	public function save_myEdit()
+	{
+		$this->verifcar_sessao();
+
+		$id = $this->input->post('id');
+		$data['name'] = $this->input->post('name');
+		$data['password'] = md5($this->input->post('password'));
+		$data['modified'] = date('Y-m-d H:i:s');
+
+		$this->load->model('users_model', 'model', TRUE);
+
+			if ($this->model->saveedit($data,$id)) {
+						redirect('dashboard');
+			} else {
+						redirect('dashboard');
 			}
 	}
 
@@ -180,7 +226,7 @@ class Users extends CI_Controller {
 
 	// 	$this->load->model('users_model', 'model', TRUE);
 	// 	if($this->model->savePermission($user_id,$team_id)){
-			
+
 	// 		redirect('users/1');
 	// 		} else {
 	// 		redirect('users/2');
@@ -197,6 +243,11 @@ class Users extends CI_Controller {
 			$data[] = array('team_id' => $team_id, 'user_id'=>$user_id);
 		}
 
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+		// die();
+
 		$this->load->model('users_model', 'model', TRUE);
 		if($this->model->savePermission($data)){
 
@@ -206,6 +257,34 @@ class Users extends CI_Controller {
 			}
 	}
 
+
+// =============================Teste Datatable===============
+
+	public function testeindex($indice=null)
+		{
+			/*Verifica Sessão*/
+			$this->verifcar_sessao();
+
+			$this->load->model("employees_model");
+			$listEmployees = $this->employees_model->listEmployees();
+
+			$dados = array("listEmployees"=>$listEmployees);
+
+			// echo "<pre>";
+			// print_r($dados);
+			// echo "</pre>";
+			// die();
+
+			$this->load->view('include/headerpopup');
+
+			$this->load->view('users/datatable.php',$dados);
+
+
+			$this->load->view('include/footer');
+		}
+
+
+// ============================================================
 
 
 }

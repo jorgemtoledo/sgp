@@ -7,6 +7,7 @@
 
 		public function listJobs(){
 
+			$this->db->order_by("name", "ASC");
 			$query = $this->db->get('jobs');
 				return $query->result();
 		}

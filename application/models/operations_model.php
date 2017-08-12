@@ -26,7 +26,7 @@
 			 	C.name as cname');
 			 $this->db->from('operations as O');
 			 $this->db->join('companies as C', 'C.id = O.company_id','inner');
-			 $this->db->order_by("oid", "ASC");
+			 $this->db->order_by("oname", "ASC");
 			 $query = $this->db->get();
 			 return $query->result();
 		}

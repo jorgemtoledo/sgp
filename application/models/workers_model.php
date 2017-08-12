@@ -37,6 +37,7 @@
 
 		public function listEmployee(){
 
+			$this->db->order_by("name", "ASC");
 			$query = $this->db->get('employees');
 				return $query->result();
 		}
@@ -49,6 +50,7 @@
 
 		public function listTeam(){
 
+			$this->db->order_by("name", "ASC");
 			$query = $this->db->get('teams');
 				return $query->result();
 		}
@@ -145,7 +147,7 @@
 	        	INNER JOIN users u ON u.id = w.user_id
 	        	INNER JOIN employees e ON e.id = w.employee_id
 	        	INNER JOIN teams t ON t.id = w.team_id
-	        	WHERE e.name LIKE '%{$nomebusca}%' OR t.name LIKE '%{$nomebusca}%' {$inicio}");
+	        	WHERE e.name LIKE '%{$nomebusca}%' OR t.name LIKE '%{$nomebusca}%' ORDER BY e.name ASC {$inicio}");
 		        $dados['inicio'] = $inicio;
 		        $dados['total'] =$sql->num_rows();
 		        $dados['dados'] = $sql->result_array();

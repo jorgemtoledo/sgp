@@ -47,7 +47,8 @@
                     <option value="2"> RH </option>
                     <option value="3"> Coordenador/Analista </option>
                     <option value="4"> Supervisor </option>
-                    <option value="5"> Operador </option>
+                    <option value="5"> Planejamento </option>
+                    <!-- <option value="5"> Operador </option> -->
                   </select>
                 </div>
               </div>

@@ -4,7 +4,6 @@
           <h1 class="page-header">Cadastrar Atestados</h1>
 
           <div class="box-tools pull-right">
-                
                 <a class="btn btn-primary" href="<?php echo base_url() ?>certificates/index/" >
               <i class="glyphicon glyphicon-arrow-left"></i>  Painel</a>
               <a class="btn btn-success" href="<?php echo base_url() ?>medical_certificates/listmedicalcertificates" ><i class="glyphicon glyphicon-list-alt"></i>   Listar Atestados </a><br />
@@ -25,20 +24,6 @@
 
               <form class="form-horizontal" role="form" action="<?php echo base_url() ?>medical_certificates/saveMedicalCertificate" method="post">
               <input type="hidden" id="sac" name="sac" value="0">
-
-              <!-- Inicio / Medico  -->
-                <!-- <div class="form-group">
-                  <div class="col-md-9">
-                    <label>Médico:</label>
-                    <input type="text" id="doctor" autocomplete="off" name="doctor_id" class="form-control" placeholder="Digite o nome do médico">
-                    <ul class="dropdown-menu txtdoctor" role="menu" aria-labelledby="dropdownMenu"  id="DropdownDoctor"></ul>
-                  </div>
-                  <div class="col-md-2" data-toggle="modal" data-target="#doctorModal">
-                    <label>Cadastrar:</label>
-                      <a class="btn btn-danger" >
-                      <i class="glyphicon glyphicon-plus"></i>   MÉDICO </a>
-                  </div>
-                </div> -->
                 <!-- Fim / Medico  -->
 
                 <!-- Inicio / Medio  -->
@@ -62,21 +47,6 @@
                 <!-- Fim / Medio & Posto de Saude  -->
 
                 <!-- Inicio / Posto de Saude  -->
-                <!-- <div class="form-group">
-                  <div class="col-md-9">
-                    <label>Posto de Saúde:</label>
-                    <input type="text" id="health" autocomplete="off" name="health_station_id" class="form-control" placeholder="Digite o nome do posto">
-                    <ul class="dropdown-menu txthealth" role="menu" aria-labelledby="dropdownMenu"  id="DropdownHealth"></ul>
-                  </div>
-                  <div class="col-md-2" data-toggle="modal" data-target="#healthModal">
-                    <label>Cadastrar:</label>
-                      <a class="btn btn-warning">
-                      <i class="glyphicon glyphicon-plus"></i>   Posto </a>
-                  </div>
-                </div> -->
-                <!-- Fim / Posto de Saude  -->
-
-                <!-- Inicio / Posto de Saude  -->
                 <div class="form-group">
                   <div class="col-md-9">
                     <label>Posto de Saúde:</label>
@@ -95,26 +65,11 @@
                 </div>
                 <!-- Fim / Posto de Saude  -->
 
-                <!-- Inicio / CID complete  -->
-                 <!-- <div class="form-group">
-                  <div class="col-md-9">
-                    <label>CID:</label>
-                    <input type="text" id="cid" autocomplete="on" name="cid_id" class="form-control" placeholder="Digite o CID/Doença aqui">
-                    <ul class="dropdown-menu txtcid" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCid"></ul>
-                  </div>
-                  <div class="col-md-2" data-toggle="modal" data-target="#myModal">
-                    <label>Cadastrar:</label>
-                      <a class="btn btn-primary" >
-                      <i class="glyphicon glyphicon-plus"></i>   CID </a>
-                  </div>
-                </div>  -->
-
                 <!-- Inicio / CID  -->
                 <div class="form-group">
                   <div class="col-md-9">
                     <label>CID:</label>
-                    <input type="text" id="buscaComplete" class="form-control" placeholder="Digite somente o codigo do CID">
-                    
+                    <input type="text" id="buscaComplete" class="form-control" placeholder="Digite somente o codigo do CID" required="required">
                   </div>
                   <div class="col-md-2" data-toggle="modal" data-target="#myModal">
                     <label>Cadastrar:</label><br />
@@ -128,29 +83,17 @@
                         <input type="text" class="form-control" id="name" disabled="disabled"><br />
                         <input type="hidden" name="cid_id" id="cid_id" value="">
                       </div>
-                    </div><br>
+                    </div>
                   </div>
-
 
                 </div>
                 <!-- Fim / CID  -->
 
                 <div class="form-group">
 
-                  <!-- <div class="col-md-8">
-                    <label>Funcionário:</label>
-                    <select id="client_id" name="worker_id" class="form-control selectpicker" data-live-search="true" required>
-                      <option value=""> Selecione </option>
-                      <?php foreach ($workers as $worker) { ?>
-                      <option value="<?php echo $worker->wid; ?>"> <?php echo $worker->ename; ?> </option>
-                      <?php } ?>
-                    </select>
-                  </div> -->
-
                   <div class="col-md-8">
                     <label>Funcionário:</label>
-                    <input type="text" id="buscaComplete_employees" class="form-control" placeholder="Nome do funcioario!">
-                    
+                    <input type="text" id="buscaComplete_employees" class="form-control" placeholder="Nome do funcionario!" required="required">
                   </div>
 
                     <div class='col-sm-3'>
@@ -165,15 +108,45 @@
                       </div>
                   </div>
 
+                  <div class="col-md-2">
+                    <label class="text-danger">Total Atestados:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control text-center" id="employee_id" disabled="disabled">
+                        <input type="hidden" class="form-control text-center" name="worker_id"id="worker_id">
+                      <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" id="viewall"><span class="glyphicon glyphicon-search"></span></button>
 
-                  <div class="col-md-4">
-                    <label class="text-danger">Quantidade de Atestados no Sistema:</label>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <input type="text" class="form-control text-center" id="employee_id" disabled="disabled"><br />
-                        <input type="hidden" class="form-control text-center" name="worker_id"id="worker_id"><br />
-                        <!-- <input type="hidden" name="employee_id" id="employee_id" value=""> -->
-                      </div>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label class="text-danger">Doação Sangue:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control text-center" id="employee_id2" disabled="disabled">
+                      <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" id="viewblood"><span class="glyphicon glyphicon-search"></button>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label class="text-danger">Lic. Maternidade:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control text-center" id="employee_maternity" disabled="disabled">
+                      <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" id="viewmaternity"><span class="glyphicon glyphicon-search"></button>
+                      </span>
+                    </div>
+                  </div>
+
+                   <div class="col-md-2">
+                    <label class="text-danger">INSS:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control text-center" id="employee_inss" disabled="disabled">
+                      <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" id="viewinss"><span class="glyphicon glyphicon-search"></button>
+                      </span>
                     </div>
                   </div>
 
@@ -193,7 +166,7 @@
                       <div class="form-group">
                       <label for="date">Fim do Afastamento:</label>
                           <div class='input-group date' id='data'>
-                              <input type='date' class="form-control text-center" id="datafim" name="finish_certificate" placeholder="DD/MM/AAAA" maxlength="10"  minlength="10"  OnKeyPress="formatar('##/##/####', this)" required />
+                              <input type='date' class="form-control text-center" id="datafim" name="finish_certificate" placeholder="DD/MM/AAAA" maxlength="10"  minlength="10"  OnKeyPress="formatar('##/##/####', this)" />
                               <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
                               </span>
@@ -217,8 +190,8 @@
 
                 <!-- Inicio / Dados do atestado -->
                 <div class="form-group">
-                  <div class="col-md-3">
-                    <label for="date">Abona a Falta?</label>
+                  <div class="col-md-1">
+                    <label for="date">Abona?</label>
                       <div class="radio">
                       <label>
                         <input type="radio" name="accredit" id="optionsRadios1" value="1" checked>
@@ -232,7 +205,41 @@
                       </label>
                     </div>
                   </div>
-                  <div class="col-md-4">
+
+                  <div class="col-md-2">
+                    <label for="date">Lic. Maternidade?</label>
+                      <div class="radio">
+                      <label>
+                        <input type="radio" name="maternity_leave" id="optionsRadios1" value="1">
+                        SIM
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="maternity_leave" id="optionsRadios1" value="0" checked>
+                       NÃO
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label for="date">INSS?</label>
+                      <div class="radio">
+                      <label>
+                        <input type="radio" name="inss" id="optionsRadios1" value="1">
+                        SIM
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inss" id="optionsRadios1" value="0" checked>
+                       NÃO
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
                     <label>Horário de Afastamento:</label>
                     <select id="day_off_id" name="day_off_id" class="form-control selectpicker" data-live-search="true" required>
                       <option value=""> Selecione </option>
@@ -241,7 +248,7 @@
                       <?php } ?>
                     </select>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <label>Tipo de Atestado:</label>
                     <select id="type_certificate_id" name="type_certificate_id" class="form-control selectpicker" data-live-search="true" required>
                       <option value=""> Selecione </option>
@@ -413,9 +420,38 @@
             delay:0,
             source:'<?php echo site_url('medical_certificates/get_dados_emmployees'); ?>',
             select:function(event, ui){
-                $("#name").val(ui.item.name);
+                $("#name_employee").val(ui.item.name);
                 $("#employee_id").val(ui.item.id);
+                $("#employee_id2").val(ui.item.id2);
+                $("#employee_inss").val(ui.item.idinss);
+                $("#employee_maternity").val(ui.item.idmaternity);
                 $("#worker_id").val(ui.item.worker_id);
+
+                var valor_id = document.getElementById('worker_id');
+
+                $("#viewall").click(function(){
+                      var viewall="<?php echo base_url(); ?>medical_certificates/reviewall/"+valor_id.value;
+                      popup = window.open(viewall,"popup"," menubar =0,toolbar =0,location=0, height=600, width=1000");
+                      popup.window.moveTo(950,150);
+                 });
+
+                $("#viewinss").click(function(){
+                      var viewinss="<?php echo base_url(); ?>medical_certificates/reviewinss/"+valor_id.value;
+                      popup = window.open(viewinss,"popup"," menubar =0,toolbar =0,location=0, height=600, width=1000");
+                      popup.window.moveTo(950,150);
+                 });
+
+                $("#viewmaternity").click(function(){
+                      var viewmaternity="<?php echo base_url(); ?>medical_certificates/reviewmaternity/"+valor_id.value;
+                      popup = window.open(viewmaternity,"popup"," menubar =0,toolbar =0,location=0, height=600, width=1000");
+                      popup.window.moveTo(950,150);
+                 });
+
+                $("#viewblood").click(function(){
+                      var viewblood="<?php echo base_url(); ?>medical_certificates/reviewblood/"+valor_id.value;
+                      popup = window.open(viewblood,"popup"," menubar =0,toolbar =0,location=0, height=600, width=1000");
+                      popup.window.moveTo(950,150);
+                 });
 
                 //var valor_id = document.getElementById('employee_id');
                 // var valor_id = document.getElementById('employee_id');

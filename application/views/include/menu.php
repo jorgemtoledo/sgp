@@ -63,9 +63,30 @@
                         <a href="#"><i class="fa fa-cogs"></i> Controle RH<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php echo base_url(); ?>workers">Funcionário por Equipe/Setor</a>
+                                <a href="<?php echo base_url(); ?>workers/listworkers">Equipe/Setor</a>
                             </li>
-                            
+                            <li>
+                                <a href="<?php echo base_url(); ?>certificates/index">Atestados Médicos</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>certificates/typeLicense">Inss/Lic. Maternidade</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>measures/index">Medidas Disciplinares</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>feedbacks/index">Feedbacks</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>attendances/listholiday">Afastamento / Férias</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>employees/examinations">Exames Periódicos</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>experiences">Periodo de Experiência</a>
+                            </li>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -79,27 +100,9 @@
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Cadastros Sistema<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <!-- <li>
-                                <a href="<?php echo base_url(); ?>companies">Empresas</a>
-                            </li> -->
-                            <li>
-                                <a href="<?php echo base_url(); ?>operations">Operações</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url(); ?>teams">Equipes</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url(); ?>situations">Situação</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url(); ?>jobs">Cargos</a>
-                            </li>
                             <li>
                                 <a href="<?php echo base_url(); ?>employees">Funcionarios</a>
                             </li>
-                            <!-- <li>
-                                <a href="<?php echo base_url(); ?>users">Usuários</a>
-                            </li> -->
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -107,28 +110,28 @@
                         <a href="#"><i class="fa fa-cogs"></i> Controle RH<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?php echo base_url(); ?>workers">Funcionário por Equipe/Setor</a>
+                                <a href="<?php echo base_url(); ?>workers/listworkers">Equipe/Setor</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>certificates/index">Atestados Médicos</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>certificates/typeLicense">Inss/Lic. Maternidade</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>measures/index">Medidas Disciplinares</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>feedbacks/index">Feedbacks</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>attendances/listholiday">Afastamento / Férias</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>employees/examinations">Exames Periódicos</a>
                             </li>
                             <!-- <li>
-                                <a href="#">Second Level Item</a>
-                            </li> -->
-                            <!-- <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level
+                                <a href="<?php echo base_url(); ?>experiences">Periodo de Experiência</a>
                             </li> -->
                         </ul>
                         <!-- /.nav-second-level -->
@@ -141,8 +144,7 @@
                     <!-- Coordenador/Analista -->
                     <!-- Nao crud no Sistema -->
 
-                    <!-- Supervisor -->
-                    <!-- Nao crud no Sistema -->
+
                     <?php
                             break;
                             case 4:

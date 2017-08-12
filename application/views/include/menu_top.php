@@ -34,9 +34,9 @@
                         </i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Dados Usuário</a>
+                        <!-- <li><a href="#"><i class="fa fa-user fa-fw"></i> Dados Usuário</a> -->
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
+                        <li><a href="<?php echo base_url('users/myEdit/'.$id_user); ?>"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url() ?>dashboard/logout"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
@@ -49,4 +49,3 @@
             <!-- /.navbar-top-links -->
 
         </nav>
-        

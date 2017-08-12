@@ -11,7 +11,9 @@
      <div class="col-lg-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                                 Atestados por mês - <?php  $yearmedicalcertificates = date("Y");
+                                 Atestados por mês - <?php
+                                                            $yearmedicalcertificates = date("Y");
+                                                            $monthmedicalcertificates = date("m");
                                                             echo $yearmedicalcertificates;
                                                      ?> - EQUIPE:
                                  <?php echo $teamOne->tname; ?>
@@ -38,149 +40,197 @@
                                     </thead>
                                     <tbody>
                                         <tr class="text-center">
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/1/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/1/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(1, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(1, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate1 = $this->db->count_all_results();
                                                         echo $countmedicaldate1;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/2/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/2/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(2, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(2, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate2 = $this->db->count_all_results();
                                                         echo $countmedicaldate2;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/3/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/3/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(3, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(3, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate3 = $this->db->count_all_results();
                                                         echo $countmedicaldate3;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/4/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/4/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(4, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(4, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate4 = $this->db->count_all_results();
                                                         echo $countmedicaldate4;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/5/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/5/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(5, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(5, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate5 = $this->db->count_all_results();
                                                         echo $countmedicaldate5;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/6/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/6/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(6, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(6, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate6 = $this->db->count_all_results();
                                                         echo $countmedicaldate6;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/7/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/7/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(7, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(7, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate7 = $this->db->count_all_results();
                                                         echo $countmedicaldate7;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/8/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/8/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(8, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(8, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate8 = $this->db->count_all_results();
                                                         echo $countmedicaldate8;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/9/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/9/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(9, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(9, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate9 = $this->db->count_all_results();
                                                         echo $countmedicaldate9;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/10/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/10/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(10, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(5, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate10 = $this->db->count_all_results();
                                                         echo $countmedicaldate10;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/11/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/11/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(11, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(5, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate11 = $this->db->count_all_results();
                                                         echo $countmedicaldate11;
-
                                             ?>
+                                            </span></a>
                                             </td>
-                                            <td>
+                                            <td><a href="<?php echo base_url(); ?>medical_certificates/reviewallMonth/12/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>"
+                                            class="btn btn-default btn-xs" role="button" aria-pressed="true" target="popup"
+                                            onclick="window.open('<?php echo base_url(); ?>medical_certificates/reviewallMonth/12/<?php echo $yearmedicalcertificates; ?>/<?php echo $teamOne->tid; ?>',
+                                            'popup','width=1000,height=1000'); return false;">
+                                            <span >
                                             <?php
                                                         $this->db->where('workers.team_id',$teamOne->tid);
-                                                        $this->db->where(12, 'MONTH(medical_certificates.created)' , FALSE);
-                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.created)' , FALSE);
+                                                        $this->db->where(12, 'MONTH(medical_certificates.delivery_date)' , FALSE);
+                                                        $this->db->where($yearmedicalcertificates, 'YEAR(medical_certificates.delivery_date)' , FALSE);
                                                         $this->db->from('medical_certificates');
                                                         $this->db->join('workers', 'workers.id = medical_certificates.worker_id');
                                                         $countmedicaldate12 = $this->db->count_all_results();
                                                         echo $countmedicaldate12;
-
                                             ?>
+                                            </span></a>
                                             </td>
 
                                         </tr>

@@ -2,8 +2,8 @@
 
 class Workers extends CI_Controller {
 
-	public function __construct() { 
-		parent::__construct(); 
+	public function __construct() {
+		parent::__construct();
 		$this->load->library('excel');
     }
 
@@ -159,7 +159,7 @@ class Workers extends CI_Controller {
             $this->pagination->initialize($config);
 
             $dados['qtidade_re'] = $qtidade;
-            $dados['inicio'] = $this->input->get('per_page') != NULL ? $this->input->get('per_page') :  '0'; 
+            $dados['inicio'] = $this->input->get('per_page') != NULL ? $this->input->get('per_page') :  '0';
             $dados['paginacao'] = $this->pagination->create_links();
             return $dados;
 
@@ -271,6 +271,11 @@ class Workers extends CI_Controller {
 		$data['modified'] = date('Y-m-d H:i:s');
 		$data['user_id'] = $this->session->userdata('id');
 
+                        // echo "<pre>";
+                        // var_dump($data);
+                        // echo "</pre>";
+                        // die();
+
 		$this->load->model('workers_model', 'model', TRUE);
 
 			if ($this->model->saveeditworkers($data,$id)) {
@@ -302,7 +307,7 @@ class Workers extends CI_Controller {
        for($col = ord('A'); $col <= ord('C'); $col++){ //set column dimension $this->excel->getActiveSheet()->getColumnDimension(chr($col))->setAutoSize(true);
                  //change the font size
                 $this->excel->getActiveSheet()->getStyle(chr($col))->getFont()->setSize(12);
-                 
+
                 $this->excel->getActiveSheet()->getStyle(chr($col))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         }
                 //retrive contries table data

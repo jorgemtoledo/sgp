@@ -33,11 +33,7 @@
                   <?php foreach ($teams as $team) { ?>
                   <div class="checkbox">
                       <label>
-                          <h3> <input 
-                                type="checkbox" 
-                                name="team_id[]" 
-                                id="team_id[]" 
-                                value="<?php echo $team->tid; ?>" 
+                          <h3> <input type="checkbox" name="team_id[]" id="team_id[]" value="<?php echo $team->tid; ?>"
                                 <?php
                                       $array = $teams_users;
                                       $array = array();

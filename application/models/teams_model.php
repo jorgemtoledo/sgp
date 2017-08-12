@@ -20,7 +20,7 @@
 			 	O.name as oname');
 			 $this->db->from('teams as T');
 			 $this->db->join('operations as O', 'O.id = T.operation_id','inner');
-			 $this->db->order_by("tid", "ASC");
+			 $this->db->order_by("tname", "ASC");
 			 $query = $this->db->get();
 			 return $query->result();
 		}
@@ -33,6 +33,7 @@
 
 		public function listOperationsCombo(){
 
+			$this->db->order_by("name", "ASC");
 			$query = $this->db->get('operations');
 				return $query->result();
 		}

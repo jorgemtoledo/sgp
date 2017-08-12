@@ -7,6 +7,10 @@
                 <a class="btn btn-success" href="<?php echo base_url() ?>medical_certificates/listmedicalcertificates" ><i class="glyphicon glyphicon-list-alt"></i>   Listar </a>
           </div>
 
+          <div>
+                <input type="button" class="btn btn-primary"  value="Voltar" onClick="history.go(-1)"> 
+          </div>
+
           <div class="box box-primary">
           <div class="box-header">
             <h3 class="box-title">Informações</h3>
@@ -75,7 +79,13 @@
                 <td><strong>Data Fim Afastamento</strong></td>
                 <td>
                 <?php   $mcfinishcertificate = strtotime(($result->mcfinishcertificate));
-                        echo date('d/m/Y', $mcfinishcertificate);
+                        $timeFinish = date('d/m/y', $mcfinishcertificate);
+                        // echo $timeFinish;
+                        if($timeFinish == '31/12/69'){
+                            echo "<p class='text-danger'>Sem Data</p>";
+                        } else {
+                            echo $timeFinish;
+                        }
                 ?>
                 &nbsp;
                 </td>

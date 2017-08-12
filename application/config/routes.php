@@ -56,9 +56,17 @@ $route['health_stations/(:num)'] = "health_stations/index/$1";
 $route['day_offs/(:num)'] = "day_offs/index/$1";
 $route['cids/(:num)'] = "cids/index/$1";
 $route['medical_certificates/(:num)'] = "medical_certificates/index/$1";
+$route['measures/(:num)'] = "measures/index/$1";
+$route['feedbacks/(:num)'] = "feedbacks/index/$1";
 $route['listmedicalcertificates/(:num)'] = "listmedicalcertificates/index/$1";
 $route['attendances/(:num)'] = "attendances/index/$1";
+$route['attendances/add/(:num)'] = "attendances/add/index/$1";
+$route['typeAttendances/(:num)'] = "typeAttendances/index/$1";
+$route['maternities/(:num)'] = "maternities/index/$1";
+$route['experiences/(:num)'] = "experiences/index/$1";
 $route['404_override'] = '';
+
+//localhost/sgp_cib/attendances/add/11/12/127
 
 
 /* End of file routes.php */

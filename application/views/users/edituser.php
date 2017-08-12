@@ -48,7 +48,8 @@
                     <option value="2" <?php echo $users[0]->level==2?' selected':''; ?>> RH </option>
                     <option value="3" <?php echo $users[0]->level==3?' selected':''; ?>> Coordenador/Analista </option>
                     <option value="4" <?php echo $users[0]->level==4?' selected':''; ?>> Supervisor </option>
-                    <option value="5" <?php echo $users[0]->level==5?' selected':''; ?>> Operador </option>
+                    <option value="4" <?php echo $users[0]->level==5?' selected':''; ?>> Planejamento </option>
+                    <!-- <option value="5" <?php echo $users[0]->level==5?' selected':''; ?>> Operador </option> -->
                   </select>
                 </div>
               </div>

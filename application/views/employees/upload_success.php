@@ -8,16 +8,16 @@
 			<h3>Seu arquivo foi enviado com sucesso!</h3>
 
 			<div class="box-tools pull">
-			<form action="" method="GET" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <a class="btn btn-success" href="<?php echo base_url() ?>employees" >
-							<i class="glyphicon glyphicon-list"></i>  Listar</a><br />
-                        </div>
-                    </div>
-                </div>
-            </form>
+                                        <form action="" method="GET" >
+                                        <div class="row">
+                                        <div class="col-md-12">
+                                        <div class="form-group">
+                                        <a class="btn btn-success" href="<?php echo base_url() ?>employees" >
+                                        <i class="glyphicon glyphicon-list"></i>  Listar</a><br />
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </form>
 		</div>
 
 	</div>

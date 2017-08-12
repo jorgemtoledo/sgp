@@ -50,7 +50,7 @@
                                             <th class="text-center">Data Entrega</th>
                                             <th class="text-center">Data Inicio Afastamento</th>
                                             <th class="text-center">Data Fim Afastamento</th>
-                                            <?php if($level == 1 || $level == 2 || $level == 3){ ?>
+                                            <?php if($level == 1 || $level == 2 || $level == 3 || $level == 4){ ?>
                                             <th class="text-center"></th>
                                             <?php } ?>
                                         </tr>
@@ -88,12 +88,12 @@
                                                     echo date('d/m/Y', $mccreated);
                                                 ?>
                                             </td>
-                                            <?php if($level == 1 || $level == 2 || $level == 3){ ?>
+                                            <?php if($level == 1 || $level == 2 || $level == 3 || $level == 4){ ?>
                                             <td>
                                                 <a href="<?php echo base_url('tasks/view/'.$listTaskEmployees->mcid);  ?>" class="btn btn-default btn-group"><i class="glyphicon glyphicon-eye-open"></i></a>
                                             </td>
                                             <?php } ?>
-                                            
+
                                         </tr>
                                         <?php } ?>
 

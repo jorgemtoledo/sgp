@@ -1,7 +1,7 @@
 <?php
 	class Medicalcertificates_model extends CI_Model{
 
-		public function __construct() {
+public function __construct() {
         parent::__construct();
     }
 
@@ -11,12 +11,64 @@
 				return $query->result();
 		}
 
+                            public function listMedicalCertificatesExcel(){
+                                 $this->db->select('e.registration as eregistration,
+                                    e.name as ename,
+                                    t.name as tname,
+                                    mc.id as mcid,
+
+                                    tp.name as tpname,
+
+                                    mc.delivery_date as mcdelivery_date,
+                                    mc.start_certificate as mcstart_certificate,
+                                    mc.finish_certificate as mcfinish_certificate,
+                                    mc.number_day as mcnumber_day,
+
+                                    mc.accredit as mcaccredit,
+
+                                    do.name as doname,
+
+                                    c.name as cname,
+                                    c.description as cdescription,
+
+                                    mc.description as mcdescription,
+
+                                    d.name as dname,
+                                    d.crm as dcrm,
+
+                                    hs.name as hsname,
+
+                                    u.name as uname,
+
+                                    mc.created as mccreated,
+                                    mc.modified as mcmodified
+
+                                    ');
+                                    $this->db->from('medical_certificates as mc');
+                                    $this->db->join('type_certificates as tp', 'tp.id = mc.type_certificate_id','inner');
+                                     $this->db->join('doctors as d', 'd.id = mc.doctor_id','inner');
+                                     $this->db->join('health_stations as hs', 'hs.id = mc.health_station_id','inner');
+                                     $this->db->join('day_offs as do', 'do.id = mc.day_off_id','inner');
+                                     $this->db->join('cids as c', 'c.id = mc.cid_id','inner');
+                                     $this->db->join('users as u', 'u.id = mc.user_id','inner');
+                                     $this->db->join('workers as w', 'w.id = mc.worker_id','inner');
+                                     $this->db->join('teams as t', 't.id = w.team_id','inner');
+                                     $this->db->join('employees as e', 'e.id = w.employee_id','inner');
+
+
+                                 $query = $this->db->get();
+                                 return $query->result();
+
+
+
+                            }
+
 		public function listWorkersCombo(){
 
 			// $query = $this->db->get('workers');
 			// 	return $query->result();
-        $this->db->select(
-			 	'w.id as wid,
+                        $this->db->select(
+	           'w.id as wid,
 	        	w.team_id as wteam,
 	        	w.user_id as wuser,
 	        	w.employee_id as wemployee,
@@ -42,7 +94,8 @@
 
 		public function listTypeCertificatesCombo(){
 
-			$query = $this->db->get('type_certificates');
+			$this->db->order_by('name', 'ASC');
+                                  $query = $this->db->get('type_certificates');
 				return $query->result();
 		}
 
@@ -78,7 +131,7 @@
             return $sql ->result();
    	   }
 
-  //  	   SELECT mc.id AS mcid, count( mc.id ) AS countcm, mc.worker_id AS mcw, w.id AS wid, 
+  //  	   SELECT mc.id AS mcid, count( mc.id ) AS countcm, mc.worker_id AS mcw, w.id AS wid,
 		// w.employee_id AS we, e.id AS eid, e.name AS ename
 		// FROM medical_certificates mc
 		// INNER JOIN workers w ON w.id = mc.worker_id
@@ -89,7 +142,7 @@
    	   //Pega employees para autocomplete
 		// public function get_employees($term){
   //       $sql = $this->db->query(
-  //       	'select employees.id, employees.name, workers.id as wid, workers.employee_id, medical_certificates.id, 
+  //       	'select employees.id, employees.name, workers.id as wid, workers.employee_id, medical_certificates.id,
   //       	count(medical_certificates.id) as countmc, medical_certificates.worker_id, medical_certificates.start_certificate
   //       	from employees
   //       	INNER JOIN workers ON workers.employee_id = employees.id
@@ -106,15 +159,33 @@
   //           return $sql ->result();
   //  	   }
    	   // Fim
-   	  
+
    	   public function get_employees($term){
         $sql = $this->db->query(
-        	'select employees.id, employees.name, workers.id as wid, workers.employee_id, medical_certificates.id, 
-        	count(medical_certificates.id) as countmc, medical_certificates.worker_id, medical_certificates.start_certificate
+        	'select employees.id, employees.name, workers.id as wid, workers.employee_id, medical_certificates.id,
+        	count(medical_certificates.id) as countmc, SUM(medical_certificates.cid_id = 13855) as sumcid,
+        	SUM(medical_certificates.inss = 1) as suminss, SUM(medical_certificates.maternity_leave = 1) as summaternity,
+        	medical_certificates.worker_id, medical_certificates.start_certificate
         	from employees
         	INNER JOIN workers ON workers.employee_id = employees.id
         	LEFT JOIN medical_certificates ON medical_certificates.worker_id = workers.id
-        	where name like "'.
+        	where active = 1 AND name like "'.
+            mysql_real_escape_string($term) .'%"
+            GROUP BY employees.name
+            order by name asc limit 0,4'
+        );
+            return $sql ->result();
+   	   }
+
+
+   	   public function get_employees2($term){
+        $sql = $this->db->query(
+        	'select employees.id, employees.name, workers.id as workersid, workers.employee_id, medical_certificates.id,
+        	count(medical_certificates.id) as countmc, medical_certificates.worker_id as mcworker_id, medical_certificates.start_certificate
+        	from employees
+        	INNER JOIN workers ON workers.employee_id = employees.id
+        	LEFT JOIN medical_certificates ON medical_certificates.worker_id = workers.id
+        	where medical_certificates.cid_id = 13855 AND name like "'.
             mysql_real_escape_string($term) .'%"
             GROUP BY employees.name
             order by name asc limit 0,4'
@@ -133,7 +204,7 @@
         $this->db->like("name", $keyword);
         return $this->db->get('doctors')->result_array();
     }
-    
+
      	public function GetRowHealth($keyword) {
         $this->db->order_by('id', 'DESC');
         $this->db->like("name", $keyword);
@@ -178,6 +249,9 @@
 	        	mc.doctor_id as mcdoctor,
 	        	mc.health_station_id as mchealthstation,
 	        	mc.description as mcdescription,
+	        	mc.inss as mcinss,
+	        	mc.maternity_leave as mcmaternity_leave,
+	        	mc.feedback as mcfeedback,
 	        	mc.created as mccreated,
 	        	mc.modified as mcmodified,
 
@@ -222,7 +296,7 @@
 	        	INNER JOIN employees e ON e.id = w.employee_id
 
 
-	        	WHERE e.name LIKE '%{$nomebusca}%' ORDER BY mc.start_certificate DESC, e.name DESC  {$inicio}");
+	        	WHERE e.name LIKE '%{$nomebusca}%' OR tp.name LIKE '%{$nomebusca}%' ORDER BY mc.id DESC, e.name DESC  {$inicio}");
 			    $dados['inicio'] = $inicio;
 			    $dados['total'] =$sql->num_rows();
 			    $dados['dados'] = $sql->result_array();
@@ -246,6 +320,8 @@
 	        	mc.doctor_id as mcdoctor,
 	        	mc.health_station_id as mchealthstation,
 	        	mc.description as mcdescription,
+	        	mc.inss as mcinss,
+	        	mc.maternity_leave as mcmaternity_leave,
 	        	mc.created as mccreated,
 	        	mc.modified as mcmodified,
 

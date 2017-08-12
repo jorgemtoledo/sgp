@@ -6,6 +6,9 @@
           <div class="box-tools pull-right">
                 <a class="btn btn-success" href="<?php echo base_url() ?>medical_certificates/listmedicalcertificates" ><i class="glyphicon glyphicon-list-alt"></i>   Listar </a>
           </div>
+          <div>
+                <input type="button" class="btn btn-primary"  value="Voltar" onClick="history.go(-1)"> 
+          </div>
 
           <div class="box box-primary">
 
@@ -18,9 +21,9 @@
                         <ul class="site-stats">
                                  <strong>
                                     <?php
-                                            $teste = $result->wid;
+                                            $worker_id = $result->wid;
                                             $query = $this->db->get('medical_certificates');
-                                            $query = $this->db->get_where('medical_certificates', array('worker_id' => $teste));
+                                            $query = $this->db->get_where('medical_certificates', array('worker_id' => $worker_id));
 
                                             foreach ($query->result() as $row)
                                             {
@@ -29,7 +32,7 @@
 
                                             echo "<br />";
                                             $this->db->select('*');
-                                            $this->db->where('worker_id', $teste);
+                                            $this->db->where('worker_id', $worker_id);
                                             $query = $this->db->get('medical_certificates');
                                             // echo $num = $query->num_rows() . " quantidade";
                                     ?>
@@ -66,7 +69,8 @@
                                                     </thead>
                                                     <?php
                                                         $query2 = $this->db->get('medical_certificates');
-                                                        $query2 = $this->db->get_where('medical_certificates', array('worker_id' => $teste));
+                                                        $query2 = $this->db->order_by("id", "desc");
+                                                        $query2 = $this->db->get_where('medical_certificates', array('worker_id' => $worker_id));
                                                      ?>
                                                     <?php foreach ($query2->result() as $results) { ?>
                                                     <tbody>
@@ -84,7 +88,13 @@
                                                     </td>
                                                     <td  class="text-center">
                                                     <?php   $timestamp = strtotime(($results->finish_certificate));
-                                                        echo date('d/m/y', $timestamp);
+                                                        $timeFinish = date('d/m/y', $timestamp);
+                                                        // echo $timeFinish;
+                                                        if($timeFinish == '31/12/69'){
+                                                            echo "<p class='text-danger'>Sem Data</p>";
+                                                        } else {
+                                                            echo $timeFinish;
+                                                        }
                                                     ?>
                                                     </td>
                                                     <td class="text-center">

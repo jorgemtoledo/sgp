@@ -180,7 +180,7 @@ class Doctors extends CI_Controller {
 	public function save_edit()
 	{
 		$this->verifcar_sessao();
-		
+
 		$id = $this->input->post('id');
 		$data['name'] = $this->input->post('name');
 		$data['crm'] = $this->input->post('crm');

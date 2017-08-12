@@ -44,7 +44,7 @@
 										echo 'Supervisor';
 									break;
 									case '5':
-										echo 'Operador';
+										echo 'Planejamento';
 									break;
 									default:
 									# code...

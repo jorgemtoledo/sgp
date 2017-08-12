@@ -7,6 +7,7 @@
 
 		public function listUsers(){
 
+			$this->db->order_by("name","ASC");
 			$query = $this->db->get('users');
 				return $query->result();
 		}
@@ -35,7 +36,7 @@
 			 $this->db->from('teams as T');
 			 $this->db->join('operations as O', 'O.id = T.operation_id','inner');
 			 $this->db->join('companies as C', 'C.id = O.company_id','left');
-			 $this->db->order_by("cid", "cname", "desc");
+			 $this->db->order_by("tname", "ASC");
 			 $query = $this->db->get();
 			 return $query->result();
 		}
@@ -81,7 +82,20 @@
 		// 	// return $this->db->insert('teams_users', [$team,$user_id]);
 		// 	}
 		// }
-		
+
+		public function level_user($id){
+		            $this->db->where('id',$id);
+		            return $this->db->get('users')->result();
+		        }
+
+		public function teams_users($id){
+		            $this->db->where('user_id',$id);
+		            return $this->db->get('teams_users')->result();
+		 }
+
+
+
+
 
 	}
 
