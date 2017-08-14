@@ -123,6 +123,57 @@
 			 return $this->db->get()->row();
 		}
 
+
+		public function get_employees($term){
+		        $sql = $this->db->query(
+		        	'select employees.id, employees.name, workers.id as wid, workers.employee_id, medical_certificates.id,
+		        	count(medical_certificates.id) as countmc, SUM(medical_certificates.cid_id = 13855) as sumcid,
+		        	SUM(medical_certificates.inss = 1) as suminss, SUM(medical_certificates.maternity_leave = 1) as summaternity,
+		        	medical_certificates.worker_id, medical_certificates.start_certificate
+		        	from employees
+		        	INNER JOIN workers ON workers.employee_id = employees.id
+		        	LEFT JOIN medical_certificates ON medical_certificates.worker_id = workers.id
+		        	where name like "'.
+		            mysql_real_escape_string($term) .'%"
+		            GROUP BY employees.name
+		            order by name asc limit 0,4'
+		        );
+		            return $sql ->result();
+		 }
+
+
+		public function listAttendancesEmployee($worker_id){
+
+			$this->db->select(
+			 	'A.id as aid,
+			 	 A.worker_id as aworker,
+			 	 A.user_id as auser,
+			 	 A.type_attendance_id as atypeattendance,
+			 	 A.day as aday,
+			 	 A.month as amonth,
+			 	 A.year as ayear,
+			 	 A.alert as aalert,
+			 	 A.description as adescription,
+			 	 A.created as acreated,
+			 	 A.modified as amodified,
+			 	 T.name as tname,
+			 	 U.name as uname,
+			 	 E.name as ename,
+			 	 TA.name as taname
+			 	');
+			 $this->db->from('attendances as A');
+			 $this->db->join('workers as W', 'W.id = A.worker_id','inner');
+			 $this->db->join('teams as T', 'T.id = W.team_id','inner');
+			 $this->db->join('users as U', 'U.id = A.user_id','inner');
+			 $this->db->join('employees as E', 'E.id = W.employee_id','inner');
+			 $this->db->join('type_attendances as TA', 'TA.id = A.type_attendance_id','inner');
+			 $this->db->where('A.worker_id',$worker_id);
+			 $this->db->order_by("A.id", "DESC");
+        	 		$query = $this->db->get();
+			 return $query->result();
+		}
+
+
 		public function savetypeattendances($data){
 			return $this->db->insert('type_attendances', $data);
 		}

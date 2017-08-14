@@ -227,14 +227,61 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Employees  -->
+                <div class="col-lg-10">
+                  <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <i class="fa fa-list-alt"></i> Exportar EXCEL - Busca por funcionário
+                  </div><br />
+                    <div class="col-lg-12">
+                    <div class="table-responsive">
+                    <form class="form-group" action="<?php echo base_url() ?>attendances/listAttendancesExcelEmployee" method="post">
+                        <div class="row">
+                          <div class="col-md-10">
+                              <label>Funcionário</label>
+                              <input type="text" id="buscaComplete_employees" class="form-control" placeholder="Nome do funcionario!" required>
+                              <input type="hidden" class="form-control text-center" name="worker_id" id="worker_id">
+                          </div>
+
+                          <br />
+                          <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary">Baixar</button>
+                          </div>
+                       </div>
+                      </form>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Finish employees -->
                 <?php } ?>
 
             </div>
         </div>
         <!-- /#page-wrapper -->
+<script src="<?php echo base_url('assets/bootstrap-3.1.1/js/jquery-2.1.4.min.js') ?>"></script>
 
+<script>
+     $(function () {
+        $("#buscaComplete_employees").autocomplete({
+            minLength:0,
+            delay:0,
+            source:'<?php echo site_url('attendances/get_dados_emmployees'); ?>',
+            select:function(event, ui){
+                $("#name_employee").val(ui.item.name);
+                $("#employee_id").val(ui.item.id);
+                $("#employee_id2").val(ui.item.id2);
+                $("#employee_inss").val(ui.item.idinss);
+                $("#employee_maternity").val(ui.item.idmaternity);
+                $("#worker_id").val(ui.item.worker_id);
 
-
+                var valor_id = document.getElementById('worker_id');
+                // alert(valor_id.value);
+                }
+            });
+        });
+    </script>
 
 
 

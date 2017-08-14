@@ -245,6 +245,48 @@ class Attendances extends CI_Controller {
 		$this->load->view('attendances/listAttendancesExcelDisable.php',$dados);
 		$this->load->view('include/footer');
 	}
+	//Pega os employees autocomplete
+	public function get_dados_emmployees(){
+	        if ( !isset($_GET['term']) )
+	        exit;
+	        $term = $_REQUEST['term'];
+	        $this->load->model("attendances_model");
+	        $data = array();
+	        $rows = $this->attendances_model->get_employees($term);
+	            foreach( $rows as $row )
+	            {
+	                $data[] = array(
+	                    'label' => $row->name,
+	                    'worker_id' => $row->wid,
+	                    // 'mcworker_id'=>$row->workersid
+	                    'id2' => $row->sumcid,
+	                    'idinss' => $row->suminss,
+	                    // 'idmaternity' => $row->wid,
+	                    'idmaternity' => $row->summaternity,
+	                    'id' => $row->countmc);
+	            }
+	        echo json_encode($data);
+	        flush();
+	    }
+
+	public function listAttendancesExcelEmployee($indice=null)
+	{
+		/*Verifica Sessão*/
+		$this->verifcar_sessao();
+		$this->load->model("attendances_model");
+
+		$worker_id = $this->input->post('worker_id');
+		$listAttendancesEmployee = $this->attendances_model->listAttendancesEmployee($worker_id);
+
+
+		$dados = array(
+			"listAttendancesEmployee"=>$listAttendancesEmployee
+		);
+
+		$this->load->view('include/headerpopup');
+		$this->load->view('attendances/listAttendancesEmployee.php',$dados);
+		$this->load->view('include/footer');
+	}
 
 	public function listAttendancePlanning($indice=null)
 	{
